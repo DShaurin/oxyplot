@@ -607,10 +607,10 @@ namespace OxyPlot.Series
         /// <param name="clippingRect">The clipping rectangle.</param>
         protected void RenderPointLabels(IRenderContext rc, OxyRect clippingRect)
         {
-            int index = -1;
-            foreach (var point in this.ActualPoints)
+            var points = this.ActualPoints;
+            for (int i = 0; i < points.Count; ++i)
             {
-                index++;
+                var point = points[i];
 
                 if (!this.IsValidPoint(point))
                 {
@@ -624,7 +624,7 @@ namespace OxyPlot.Series
                     continue;
                 }
 
-                var item = this.GetItem(index);
+                var item = this.GetItem(i);
                 var s = StringHelper.Format(this.ActualCulture, this.LabelFormatString, item, point.X, point.Y);
 
 #if SUPPORTLABELPLACEMENT
